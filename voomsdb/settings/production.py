@@ -3,7 +3,7 @@ import dj_database_url
 from voomsdb.utils.settings import get_env_variable
 
 
-ALLOWED_HOSTS = ['127.0.0.1']
+ALLOWED_HOSTS = ['*']
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = "django-insecure-)rceb+k668zri#f6+r_iesr2@a32zkxuh-2)&3#kfyu(a@gz4="
