@@ -1,0 +1,117 @@
+{% extends 'partials/_auth_layout.html' %}
+{% block page_title %}{{student}}{% endblock page_title %}
+{% block dashboard_content %}
+<div class="row">
+    <div class="col-12 mb-3 text-center">
+        <h1 class="h3 mb-2 mb-sm-0">Edit {{student}}'s Profile</h1>
+    </div>
+</div>
+<div class="card bg-transparent">
+    <form action="" method="post" enctype="multipart/form-data">
+        {% include 'partials/_form_errors.html' %}
+        {% csrf_token %}
+        <div>
+            <h6>Personal Details</h6>
+            <div class="row">
+                <div class="col-md-6 col-sm-12 my-2">
+                    {{form.first_name}}
+                </div>
+                <div class="col-md-6 col-sm-12 my-2">
+                    {{form.last_name}}
+                </div>
+                <div class="col-md-6 col-sm-12 my-2">
+                    {{form.middle_name}}
+                </div>
+                <div class="col-md-6 col-sm-12 my-2">
+                    {{form.email}}
+                </div>
+                <div class="col-12 my-2">
+                    {{form.image}}
+                </div>
+                <div class="col-md-6 col-sm-12 my-2">
+                    {{form.mobile_no}}
+                </div>
+                <div class="col-md-6 col-sm-12 my-2">
+                    {{form.gender}}
+                </div>
+                <div class="col-sm-12 my-2">
+                    {{form.address}}
+                </div>
+            </div>
+        </div>
+        <div>
+            <h6>Academic Details</h6>
+            <div class="row">
+                <div class="col-md-6 col-sm-12 my-2">
+                    {{form.matric_number}}
+                </div>
+                <div class="col-md-6 col-sm-12 my-2">
+                    {{form.programme}}
+                </div>
+                <div class="col-md-6 col-sm-12 my-2">
+                    {{form.admission_type}}
+                </div>
+                <div class="col-md-6 col-sm-12 my-2">
+                    {{form.year_of_admission}}
+                </div>
+            </div>
+        </div>
+
+        <div id="documents" class="my-3">
+
+            <div class="d-flex justify-content-between">
+                <h6>Documents</h6>
+                <button type="button" class="btn btn-dark btn-sm" id="add-more-btn" title="Add More Documents"><i class="fas fa-plus"></i></button>
+            </div>
+            <div class="bg-light rounded p-3 my-2">
+                {% for doc in student.document_set.all %}
+                    <div class="row" id="{{doc.slug}}">
+                        <div class="col-md-2 col-sm-12 my-2">
+                            <a href="{% url 'student:delete-student-document' student.slug doc.slug %}" class="btn btn-danger btn-sm" data-slug="{{doc.slug}}">Delete</a>
+                        </div>
+                        <div class="col-md-4 col-sm-12 my-2">
+                            <p class="fw-bolder">{{doc.name}}</p>
+                        </div>
+                        <div class="col-md-6 col-sm-12 my-2">
+                            <a href="{{doc.document.url}}">{{doc.document.url}}</a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            {% if not student.document_set.all %}
+            <div class="row">
+                <div class="col-md-6 col-sm-12 my-2">
+                    <input type="text" name="document-name" id="" class="form-control" placeholder="Document Name">
+                </div>
+                <div class="col-md-6 col-sm-12 my-2">
+                    <input type="file" name="document-file" id="" class="form-control">
+                </div>
+            </div>
+            {% endif %}
+        </div>
+        
+        <button type="submit" class="btn btn-dark">Update Profile</button>
+    </form>
+</div>
+{% endblock dashboard_content %}
+
+{% block extra-script %}
+<script>
+    $(document).ready(
+        $("#add-more-btn").click(() => {
+            $(`#documents`).append(
+                `
+                <div class="row">
+                    <div class="col-md-6 col-sm-12 my-2">
+                        <input type="text" name="document-name" id="" class="form-control" placeholder="Document Name">
+                    </div>
+                    <div class="col-md-6 col-sm-12 my-2">
+                        <input type="file" name="document-file" id="" class="form-control">
+                    </div>
+                </div>
+                `
+            )
+        })
+    )
+</script>
+{% endblock extra-script %}

@@ -1,0 +1,51 @@
+{% extends "partials/_layout.html" %}
+
+{% load i18n static %}
+{% load account socialaccount %}
+
+{% block page_title %}{% trans "Sign Out" %}{% endblock %}
+
+{% block content %}
+<div id="main-wrapper" class="oxyy-login-register">
+  <div class="container-fluid px-0">
+    <div class="row no-gutters min-vh-100">
+      <!-- Register Form
+      ========================= -->
+      <div class="col-md-6 d-flex flex-column align-items-center order-2 order-md-1 mx-auto">
+
+        <div class="container my-auto py-5">
+          <div class="row">
+            <div class="col-11 col-md-10 col-lg-9 col-xl-8 mx-auto">
+              <h3 class="font-weight-300 text-9 mb-5">
+                <span class="logo mt-5 mb-5 mb-md-0"><a class="d-flex"
+                    href="{% url 'home:index' %}" title="Equity Share">
+                  <img
+                      src="{% static 'images/voom.png' %}" alt="VOOMS DB" width="200"></a></span></h3>
+
+              <!-- Title -->
+              <h1 class="mt-4 mb-4">{% trans "Sign Out" %}</h1>
+              <!-- info -->
+              <p class=" text-secondary">{% trans 'Are you sure you want to sign out?' %}</p>
+
+              <form method="post" action="{% url 'account_logout' %}">
+                {% include "partials/_messages.html" %}
+                {% include "partials/_form_errors.html" %}
+
+                <div>
+                  <button type="submit" class="btn btn-dark shadow-none font-weight-400 my-4">{% trans 'Sign Out' %}</button>
+                  <a href="{% url 'home:index' %}" class="btn btn-facebook m-1">Homepage</a>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Register Form End -->
+
+      <!-- Welcome Text
+
+      <!-- Welcome Text End -->
+    </div>
+  </div>
+</div>
+{% endblock content %}

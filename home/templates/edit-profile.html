@@ -1,0 +1,37 @@
+{% extends 'partials/_auth_layout.html' %}
+{% block page_title %}Add Student{% endblock page_title %}
+{% block dashboard_content %}
+<div class="row">
+    <div class="col-12 mb-3 text-center">
+        <h1 class="h3 mb-2 mb-sm-0">Edit Profile</h1>
+    </div>
+</div>
+<div class="card bg-transparent">
+    <form action="" method="post" enctype="multipart/form-data">
+        {% include 'partials/_form_errors.html' %}
+        {% csrf_token %}
+        <div>
+            <div class="row">
+                <div class="col-md-6 col-sm-12 my-2">
+                    {{form.first_name}}
+                </div>
+                <div class="col-md-6 col-sm-12 my-2">
+                    {{form.last_name}}
+                </div>
+                <div class="col-md-6 col-sm-12 my-2">
+                    {{form.username}}
+                </div>
+                <div class="col-md-6 col-sm-12 my-2">
+                    {{form.email}}
+                </div>
+            </div>
+        </div>
+        
+        <button type="submit" class="btn btn-dark">Update Account</button>
+    </form>
+</div>
+{% endblock dashboard_content %}
+
+{% block extra-script %}
+
+{% endblock extra-script %}

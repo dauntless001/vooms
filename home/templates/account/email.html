@@ -1,0 +1,117 @@
+{% extends "partials/portal/_auth_layout.html" %}
+
+{% load i18n static %}
+{% load account socialaccount %}
+
+{% block title %}{% trans "E-mail Addresses" %}{% endblock %}
+
+{% block body %}
+<div id="main-wrapper" class="oxyy-login-register">
+  <div class="container-fluid px-0">
+    <div class="row no-gutters min-vh-100"> 
+      <!-- Register Form
+      ========================= -->
+      <div class="col-md-6 d-flex flex-column align-items-center order-2 order-md-1">
+        
+        <div class="container my-auto py-5">
+          <div class="row">
+            <div class="col-11 col-md-10 col-lg-9 col-xl-8 mx-auto">
+              <h3 class="font-weight-300 text-9 mb-5"><span class="logo mt-5 mb-5 mb-md-0"><a class="d-flex" href="{% url 'home:index' %}" title="EquityShare"><img src="{% static 'images/equityshare-logo-tm.png' %}" alt="Equity Share"></a></span></h3>
+
+              <h3 class="font-weight-300 text-9 mb-5">{% trans "E-mail Addresses" %}</h3>
+              
+              {% if user.emailaddress_set.all %}
+              <p>{% trans 'The following e-mail addresses are associated with your account:' %}</p>
+
+              <form action="{% url 'account_email' %}" class="email_list" method="post">
+                {% include "partials/_messages.html" %}
+                {% include "partials/_form_errors.html" %}
+
+                <div class="form-group font-weight-300 m-4">
+                {% for emailaddress in user.emailaddress_set.all %}
+                  <label for="email_radio_{{forloop.counter}}" class="{% if emailaddress.primary %}primary_email{% endif %}">
+
+                    <input id="email_radio_{{forloop.counter}}" type="radio" name="email"
+                      {% if emailaddress.primary or user.emailaddress_set.count == 1 %}checked="checked" {% endif %}
+                      value="{{emailaddress.email}}" />
+            
+                    {{ emailaddress.email }}
+                    {% if emailaddress.verified %}
+                    <span class="badge badge-success p-2 ml-1">{% trans "Verified" %}</span>
+                    {% else %}
+                    <span class="badge badge-danger p-2 ml-1">{% trans "Unverified" %}</span>
+                    {% endif %}
+                    {% if emailaddress.primary %}<span class="badge badge-primary p-2 ml-1">{% trans "Primary" %}</span>{% endif %}
+                  </label>
+                  {% endfor %}
+                </div>
+
+                <button class="btn btn-sm btn-dark btn-block shadow-none font-weight-400 my-1 mt-4" type="submit" name="action_primary">{% trans 'Make Primary' %}</button>
+                <button class="btn btn-sm btn-facebook btn-block shadow-none font-weight-400 my-1" type="submit" name="action_send">{% trans 'Re-send Verification' %}</button>
+                <button class="btn btn-sm btn-instagram btn-block shadow-none font-weight-400 my-1" type="submit" name="action_remove">{% trans 'Remove' %}</button>
+              </form>
+
+              {% else %}
+                <p><strong>{% trans 'Warning:'%}</strong>
+                  {% trans "You currently do not have any e-mail address set up. You should really add an e-mail address so you can receive notifications, reset your password, etc." %}
+                </p>
+              {% endif %}
+
+              {% if can_add_email %}
+              <h3 class="font-weight-300 text-9 mt-5">{% trans "Add E-mail Address" %}</h3>
+
+              <form method="post" action="{% url 'account_email' %}" class="add_email">
+                {% include "partials/_form_errors.html" %}
+                <div class="form-group font-weight-300">
+                  {{form.email.label_tag}}
+                  <input type="email" placeholder="Email address" required id="{{form.email.id_for_label}}" minlength="8"
+                  name="{{form.email.name}}" class="form-control">
+                </div>
+                <button class="btn btn-sm btn-dark btn-block shadow-none font-weight-400" name="action_add" type="submit">{% trans "Add E-mail" %}</button>
+              </form>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Register Form End --> 
+     
+    <!-- Welcome Text
+      ========================= -->
+      <div class="col-md-6 bg-light  order-1 order-md-2">
+        <div class="container h-100 d-flex flex-column">
+          <div class="row no-gutters">
+            <div class="col-11 col-md-10 mx-auto">
+              <div class="logo mt-5 mb-5 mb-md-0"></div>
+            </div>
+          </div>
+          <div class="row no-gutters my-auto">
+            <div class="col-11 col-md-10 mx-auto">
+                <h1 class="text-13 font-weight-300 mb-4 cityimage" ><img src="{% static 'images/equityshare-city.png' %}" width="600" height="239" alt="EquityShare"></a></h1>
+              <h1 class="text-13 font-weight-300 mb-4">Real Estate Investing on the Block™</h1>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Welcome Text End --> 
+    </div>
+  </div>
+</div>
+{% endblock body %}
+
+
+{% block scripts %}
+<script type="text/javascript">
+  (function () {
+    var message = "{% trans 'Do you really want to remove the selected e-mail address?' %}";
+    var actions = document.getElementsByName('action_remove');
+    if (actions.length) {
+      actions[0].addEventListener("click", function (e) {
+        if (!confirm(message)) {
+          e.preventDefault();
+        }
+      });
+    }
+  })();
+</script>
+{% endblock scripts %}

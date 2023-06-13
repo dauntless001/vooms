@@ -1,0 +1,111 @@
+{% load account %}
+{% load static i18n %}
+
+{% autoescape off %}
+{% user_display user as user_display %}
+{% with site_name=current_site.name site_domain=current_site.domain %}
+
+<!doctype html>
+<html style="-webkit-box-sizing: border-box;-moz-box-sizing: border-box;box-sizing: border-box;font-size: 16px;">
+
+<head style="-webkit-box-sizing: inherit;-moz-box-sizing: inherit;box-sizing: inherit;">
+  <title style="-webkit-box-sizing: inherit;-moz-box-sizing: inherit;box-sizing: inherit;">EquityShare</title>
+  <meta charset="UTF-8" style="-webkit-box-sizing: inherit;-moz-box-sizing: inherit;box-sizing: inherit;">
+  <meta name="description"
+    content="Buy, sell, and exchange various Real Estate Tokens backed by specific target assets on our EquityShare Crowdfunding Portal"
+    style="-webkit-box-sizing: inherit;-moz-box-sizing: inherit;box-sizing: inherit;">
+  <meta name="keywords" content="equityshare, real-estate crowdfunding"
+    style="-webkit-box-sizing: inherit;-moz-box-sizing: inherit;box-sizing: inherit;">
+  <meta name="viewport" content="width=device-width,initial-scale=1"
+    style="-webkit-box-sizing: inherit;-moz-box-sizing: inherit;box-sizing: inherit;">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge"
+    style="-webkit-box-sizing: inherit;-moz-box-sizing: inherit;box-sizing: inherit;">
+  {% include "partials/email/_email_css.html" with current_site=current_site %}
+  <!--[if IE 6]>
+	<style type="text/css">
+		* html .group {
+			height: 1%;
+		}
+	</style>
+  <![endif]-->
+  <!--[if IE 7]>
+	<style type="text/css">
+		*:first-child+html .group {
+			min-height: 1px;
+		}
+	</style>
+  <![endif]-->
+  <!--[if lt IE 9]>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+  <![endif]-->
+
+</head>
+
+<body
+  style="width: 100%;border: none;border-spacing: 0;text-align: center;-webkit-box-sizing: inherit;-moz-box-sizing: inherit;box-sizing: inherit;margin: 0;padding: 0;font: inherit;font-size: 2.25rem;vertical-align: baseline;line-height: 1;color: #000000;background: white;min-width: 990px;font-family: 'Open Sans', sans-serif;font-style: normal;font-weight: normal;letter-spacing: 0;text-decoration: none;">
+  <div class="global_container_"
+    style="-webkit-box-sizing: inherit;-moz-box-sizing: inherit;box-sizing: inherit;margin: 0 auto;padding: 56px 0;border: 0;font: inherit;font-size: 100%;vertical-align: baseline;float: none;height: auto;position: relative;width: 100%;background: url(https://beta.equityshare.ai/assets/email/white-square_copy.png) no-repeat center 0;background-position: center top;-webkit-background-size: cover;-moz-background-size: cover;-o-background-size: cover;background-size: cover;">
+    <header class="header"
+      style="-webkit-box-sizing: inherit;-moz-box-sizing: inherit;box-sizing: inherit;margin: 0 auto;padding: 0;border: 0;font: inherit;font-size: 100%;vertical-align: baseline;display: block;height: 66px;position: relative;width: 419px;background: url(https://beta.equityshare.ai/assets/images/equityshare-logo-tm.png) no-repeat;">
+    </header>
+    <div class="col"
+      style="-webkit-box-sizing: inherit;-moz-box-sizing: inherit;box-sizing: inherit;margin: 55px auto 0;padding: 66px 0 89px;border: 0;font: inherit;font-size: 100%;vertical-align: baseline;position: relative;background: #00aeef;">
+      <div class="l-constrained-2"
+        style="-webkit-box-sizing: inherit;-moz-box-sizing: inherit;box-sizing: inherit;margin: 0 auto;padding: 0;border: 0;font: inherit;font-size: 100%;vertical-align: baseline;position: relative;width: 990px;">
+        <p class="text"
+          style="-webkit-box-sizing: inherit;-moz-box-sizing: inherit;box-sizing: inherit;margin: 0;padding: 0;border: 0;font: inherit;font-size: 3.75rem;vertical-align: baseline;color: #ffffff;font-weight: bold;text-align: center;">
+          Welcome to EquityShare</p>
+        <p class="text-2"
+          style="-webkit-box-sizing: inherit;-moz-box-sizing: inherit;box-sizing: inherit;margin: 62px 0 0;padding: 0;border: 0;font: inherit;font-size: 100%;vertical-align: baseline;color: #ffffff;text-align: center;">
+          Please confirm your account to get started</p>
+        <div class="layer-4-holder"
+          style="-webkit-box-sizing: inherit;-moz-box-sizing: inherit;box-sizing: inherit;margin: 82px auto 0;padding: 0;border: 0;font: inherit;font-size: 100%;vertical-align: baseline;min-height: 99px;width: 587px;background: url(https://beta.equityshare.ai/assets/email/layer_4.png) no-repeat;color: #ffffff;font-weight: 800;line-height: 99px;text-align: center;">
+          <a href="{{ activate_url }}"
+            style="-webkit-box-sizing: inherit;-moz-box-sizing: inherit;box-sizing: inherit;margin: 0;padding: 0;border: 0;font: inherit;font-size: 100%;vertical-align: baseline;color: inherit;text-decoration: none;">CONFIRM
+            ACCOUNT</a>
+        </div>
+      </div>
+    </div>
+    <div class="l-constrained"
+      style="-webkit-box-sizing: inherit;-moz-box-sizing: inherit;box-sizing: inherit;margin: 68px auto 0;padding: 0;border: 0;font: inherit;font-size: 100%;vertical-align: baseline;position: relative;width: 990px;">
+      <p class="text-4"
+        style="-webkit-box-sizing: inherit;-moz-box-sizing: inherit;box-sizing: inherit;margin: 0 auto;padding: 0;border: 0;font: inherit;font-size: 100%;vertical-align: baseline;width: 988px;line-height: 1.2;text-align: center;">
+        <span class="fw600"
+          style="-webkit-box-sizing: inherit;-moz-box-sizing: inherit;box-sizing: inherit;margin: 0;padding: 0;border: 0;font: inherit;font-size: 100%;vertical-align: baseline;font-weight: 600;">Your
+          Account Information:</span><br
+          style="-webkit-box-sizing: inherit;-moz-box-sizing: inherit;box-sizing: inherit;"><span class="text-style"
+          style="-webkit-box-sizing: inherit;-moz-box-sizing: inherit;box-sizing: inherit;margin: 0;padding: 0;border: 0;font: inherit;font-size: 100%;vertical-align: baseline;line-height: 43px;">&nbsp;</span><br
+          style="-webkit-box-sizing: inherit;-moz-box-sizing: inherit;box-sizing: inherit;">User: {{user_display}}<br
+          style="-webkit-box-sizing: inherit;-moz-box-sizing: inherit;box-sizing: inherit;">Email: {{user.email}}</p>
+      <p class="text-5"
+        style="-webkit-box-sizing: inherit;-moz-box-sizing: inherit;box-sizing: inherit;margin: 86px 0 0;padding: 0;border: 0;font: inherit;font-size: 3rem;vertical-align: baseline;font-weight: bold;text-align: center;">
+        We’re here to help!</p>
+      <p class="text-6"
+        style="-webkit-box-sizing: inherit;-moz-box-sizing: inherit;box-sizing: inherit;margin: 50px auto 0;padding: 0;border: 0;font: inherit;font-size: 100%;vertical-align: baseline;width: 988px;line-height: 1.2;text-align: center;">
+        Have questions? Our call center is open around the clock at<br
+          style="-webkit-box-sizing: inherit;-moz-box-sizing: inherit;box-sizing: inherit;">866.244.2345 or email us at
+        reach@equityshare.ai</p>
+      <p class="text-7"
+        style="-webkit-box-sizing: inherit;-moz-box-sizing: inherit;box-sizing: inherit;margin: 124px 0 0;padding: 0;border: 0;font: inherit;font-size: 1.375rem;vertical-align: baseline;color: #6b6b6b;line-height: 1.2;text-align: center;">
+        <span class="text-style-3"
+          style="-webkit-box-sizing: inherit;-moz-box-sizing: inherit;box-sizing: inherit;margin: 0;padding: 0;border: 0;font: inherit;font-size: 1.75rem;vertical-align: baseline;">333
+          City Blvd W, Suite 354, Orange CA, 92805</span><br class="text-style-2"
+          style="-webkit-box-sizing: inherit;-moz-box-sizing: inherit;box-sizing: inherit;display: block;line-height: 16px;margin-bottom: 0;">&nbsp;<span
+          class="text-style-4"
+          style="-webkit-box-sizing: inherit;-moz-box-sizing: inherit;box-sizing: inherit;margin: 0;padding: 0;border: 0;font: inherit;font-size: 100%;vertical-align: baseline;line-height: 33px;">&nbsp;</span><br
+          class="text-style-2"
+          style="-webkit-box-sizing: inherit;-moz-box-sizing: inherit;box-sizing: inherit;display: block;line-height: 16px;margin-bottom: 0;">&nbsp;<span
+          class="text-style-4"
+          style="-webkit-box-sizing: inherit;-moz-box-sizing: inherit;box-sizing: inherit;margin: 0;padding: 0;border: 0;font: inherit;font-size: 100%;vertical-align: baseline;line-height: 33px;">&nbsp;</span><br
+          style="-webkit-box-sizing: inherit;-moz-box-sizing: inherit;box-sizing: inherit;">You’re receiving this
+        because you signed up for an account<br
+          style="-webkit-box-sizing: inherit;-moz-box-sizing: inherit;box-sizing: inherit;"><a href="#"
+          style="-webkit-box-sizing: inherit;-moz-box-sizing: inherit;box-sizing: inherit;margin: 0;padding: 0;border: 0;font: inherit;font-size: 100%;vertical-align: baseline;color: inherit;text-decoration: none;">Unsubscribe</a>
+      </p>
+    </div>
+  </div>
+</body>
+
+</html>
+{% endwith %}
+{% endautoescape %}

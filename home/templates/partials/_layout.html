@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <title>{% block page_title %}{% endblock page_title %} - Vooms Database</title>
+
+    <!-- Meta Tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="chrislanduniversity.edu.ng">
+    <meta name="description" content="VOOMS - database management system">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="{% static 'images/voom.png' %}">
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com/">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700&amp;family=Roboto:wght@400;500;700&amp;display=swap">
+
+    {% include 'partials/_stylesheets.html' %}
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-7N7LGGGWT1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-7N7LGGGWT1');
+    </script>
+
+</head>
+
+<body>
+    {% block content %}
+        {% include 'partials/_navbar.html' %}
+
+
+        <main>
+            {% block main %}
+
+            {% endblock main %}
+
+        </main>
+
+        {% include 'partials/_footer.html' %}
+
+        <div class="back-top"><i class="bi bi-arrow-up-short position-absolute top-50 start-50 translate-middle"></i></div>
+    {% endblock content %}    
+    {% include 'partials/_scripts.html' %}
+    {% block extra-script %}
+
+    {% endblock extra-script %}
+</body>
+
+</html>

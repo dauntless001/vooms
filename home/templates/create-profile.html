@@ -1,0 +1,115 @@
+{% extends 'partials/_layout.html' %}
+{% block page_title %}Create Profile{% endblock page_title %}
+{% block main %}
+
+<div class="container">
+    {% include 'partials/_messages.html' %}
+    <div class="row">
+        <div class="col-12 mb-3 text-center">
+            <h1 class="h3 mb-2 mb-sm-0">Create Profile</h1>
+        </div>
+    </div>
+    <div class="card bg-transparent">
+        <form action="" method="post" enctype="multipart/form-data">
+            {% include 'partials/_form_errors.html' %}
+            {% csrf_token %}
+            <div>
+                <h6>Personal Details</h6>
+                <div class="row">
+                    <div class="col-md-6 col-sm-12 my-2">
+                        {{form.first_name}}
+                    </div>
+                    <div class="col-md-6 col-sm-12 my-2">
+                        {{form.last_name}}
+                    </div>
+                    <div class="col-md-6 col-sm-12 my-2">
+                        {{form.middle_name}}
+                    </div>
+                    <div class="col-md-6 col-sm-12 my-2">
+                        {{form.email}}
+                    </div>
+                    <div class="col-12 my-2">
+                        {{form.image}}
+                    </div>
+                    <div class="col-md-6 col-sm-12 my-2">
+                        {{form.mobile_no}}
+                    </div>
+                    <div class="col-md-6 col-sm-12 my-2">
+                        {{form.gender}}
+                    </div>
+                    <div class="col-sm-12 my-2">
+                        {{form.address}}
+                    </div>
+                </div>
+            </div>
+            <div>
+                <h6>Academic Details</h6>
+                <div class="row">
+                    <div class="col-md-6 col-sm-12 my-2">
+                        {{form.matric_number}}
+                    </div>
+                    <div class="col-md-6 col-sm-12 my-2">
+                        {{form.programme}}
+                    </div>
+                    <div class="col-md-6 col-sm-12 my-2">
+                        {{form.admission_type}}
+                    </div>
+                    <div class="col-md-6 col-sm-12 my-2">
+                        {{form.year_of_admission}}
+                    </div>
+                </div>
+            </div>
+    
+            <div id="documents" class="my-3">
+    
+                <div class="d-flex justify-content-between">
+                    <h6>Documents</h6>
+                    <button type="button" class="btn btn-dark btn-sm" id="add-more-btn" title="Add More Documents"><i class="fas fa-plus"></i></button>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 col-sm-12 my-2">
+                        <input type="text" name="document-name" id="" class="form-control" placeholder="Document Name" required>
+                    </div>
+                    <div class="col-md-6 col-sm-12 my-2">
+                        <input type="file" name="document-file" id="" class="form-control" required>
+                    </div>
+                </div>
+            </div>
+            
+            <button type="submit" class="btn btn-dark">Add Profile</button>
+        </form>
+    </div>
+</div>
+{% endblock main %}
+
+{% block extra-script %}
+<script>
+    $(document).ready(
+        $("#add-more-btn").click(() => {
+            $(`#documents`).append(
+                `
+                <div class="row">
+                    <div class="col-md-6 col-sm-12 my-2">
+                        <input type="text" name="document-name" id="" class="form-control" placeholder="Document Name">
+                    </div>
+                    <div class="col-md-6 col-sm-12 my-2">
+                        <input type="file" name="document-file" id="" class="form-control">
+                    </div>
+                </div>
+                `
+            )
+        })
+    )
+    window.addEventListener('load', () => {
+        document.querySelectorAll('#profile-type').forEach(profile => {
+            profile.addEventListener("click", e => {
+                const {value} = e.currentTarget
+                document.querySelectorAll('.profile-form').forEach(profile => {
+                    profile.classList.add("hidden")
+                })
+                document.getElementById(`${value}-form`).classList.remove("hidden")
+            })
+        })
+    })
+</script>
+{% endblock extra-script %}

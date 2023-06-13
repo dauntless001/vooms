@@ -1,0 +1,77 @@
+{% load static %}
+<!-- Header START -->
+<header class="navbar-light navbar-sticky header-static">
+    <!-- Logo Nav START -->
+    <nav class="navbar navbar-expand-xl">
+        <div class="container-fluid px-3 px-xl-5">
+            <!-- Logo START -->
+            <a class="navbar-brand" href="{% url 'home:index' %}">
+                <img class="light-mode-item navbar-brand-item" src="{% static 'images/voom.png' %}" alt="logo">
+                <img class="dark-mode-item navbar-brand-item" src="{% static 'images/voom.png' %}" alt="logo">
+            </a>
+            <!-- Logo END -->
+
+            <!-- Responsive navbar toggler -->
+            <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-animation">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </span>
+            </button>
+
+            <!-- Main navbar START -->
+            <div class="navbar-collapse w-100 collapse" id="navbarCollapse">
+
+
+                <!-- Nav Main menu START -->
+                <ul class="navbar-nav navbar-nav-scroll mx-auto">
+                    <!-- Nav item 1 Demos -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link active" href="{% url 'home:index' %}" id="demoMenu" >Home</a>
+                    </li>
+
+                    <!-- Nav item 2 Pages -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" href="{% url 'home:about-us' %}" id="pagesMenu">About us</a>
+                    </li>
+
+                    <!-- Nav item 3 Account -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" href="{% url 'home:get-in-touch' %}" id="accounntMenu" >Get in touch</a>
+                    </li>
+                    {% if user.is_authenticated %}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" href="{% url 'home:dashboard' %}" id="accounntMenu" >Dashboard</a>
+                    </li>
+                    {% else %}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" href="{% url 'account_login' %}" id="accounntMenu" >Login</a>
+                    </li>
+                    {% endif %}
+                </ul>
+                <!-- Nav Main menu END -->
+
+                <!-- Nav Search START -->
+                <div class="nav my-3 my-xl-0 px-4 flex-nowrap align-items-center">
+                    <div class="nav-item w-100">
+                        <form class="position-relative">
+                            <input class="form-control pe-5 bg-transparent" type="search" placeholder="Search"
+                                aria-label="Search">
+                            <button
+                                class="btn bg-transparent px-2 py-0 position-absolute top-50 end-0 translate-middle-y"
+                                type="submit"><i class="fas fa-search fs-6 "></i></button>
+                        </form>
+                    </div>
+                </div>
+                <!-- Nav Search END -->
+            </div>
+            <!-- Main navbar END -->
+
+        </div>
+    </nav>
+    <!-- Logo Nav END -->
+</header>
+<!-- Header END -->

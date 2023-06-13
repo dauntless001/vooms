@@ -1,0 +1,174 @@
+{% extends 'partials/_auth_layout.html' %}
+{% block page_title %}Dashboard{% endblock page_title %}
+{% block dashboard_content %}
+
+<!-- Title -->
+<div class="row">
+    <div class="col-12 mb-3">
+        <h1 class="h3 mb-2 mb-sm-0">Dashboard</h1>
+    </div>
+</div>
+
+<!-- Counter boxes START -->
+<div class="row g-4 mb-4">
+    <!-- Counter item -->
+    <div class="col-md-6 col-xxl-3">
+        <div class="card card-body bg-warning bg-opacity-15 p-4 h-100">
+            <a href="{% url 'student:students' %}">
+                <div class="d-flex justify-content-between align-items-center">
+                    <!-- Digit -->
+                    <div>
+                        <h2 class="purecounter mb-0 fw-bold" data-purecounter-start="0" data-purecounter-end="{{student_count}}"
+                            data-purecounter-delay="200">0</h2>
+                        <span class="mb-0 h6 fw-light">All Students</span>
+                    </div>
+                    <!-- Icon -->
+                    <div class="icon-lg rounded-circle bg-warning text-white mb-0"><i class="fas fa-tv fa-fw"></i></div>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <!-- Counter item -->
+    <div class="col-md-6 col-xxl-3">
+        <div class="card card-body bg-purple bg-opacity-10 p-4 h-100">
+            <a href="{% url 'student:students' %}">
+                <div class="d-flex justify-content-between align-items-center">
+                    <!-- Digit -->
+                    <div>
+                        <h2 class="purecounter mb-0 fw-bold" data-purecounter-start="0" data-purecounter-end="{{verified_students}}"
+                            data-purecounter-delay="200">0</h2>
+                        <span class="mb-0 h6 fw-light">Verified students</span>
+                    </div>
+                    <!-- Icon -->
+                    <div class="icon-lg rounded-circle bg-purple text-white mb-0"><i class="fas fa-user-tie fa-fw"></i>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <!-- Counter item -->
+    <div class="col-md-6 col-xxl-3">
+        <div class="card card-body bg-primary bg-opacity-10 p-4 h-100">
+            <a href="{% url 'student:students' %}?verified=False">
+                <div class="d-flex justify-content-between align-items-center">
+                    <!-- Digit -->
+                    <div>
+                        <h2 class="purecounter mb-0 fw-bold" data-purecounter-start="0" data-purecounter-end="{{unverified_students}}"
+                            data-purecounter-delay="200">0</h2>
+                        <span class="mb-0 h6 fw-light">Unverified students</span>
+                    </div>
+                    <!-- Icon -->
+                    <div class="icon-lg rounded-circle bg-primary text-white mb-0"><i
+                            class="fas fa-user-graduate fa-fw"></i></div>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <!-- Counter item -->
+    <div class="col-md-6 col-xxl-3">
+        <div class="card card-body bg-success bg-opacity-10 p-4 h-100">
+            <a href="{% url 'home:edit-profile' %}">
+                <div class="d-flex justify-content-between align-items-center">
+                    <!-- Digit -->
+                    <div>
+
+                        <span class="mb-0 h6 fw-light">Settings</span>
+                    </div>
+                    <!-- Icon -->
+                    <div class="icon-lg rounded-circle bg-success text-white mb-0"><i
+                            class="bi bi-gear-fill fa-fw"></i></div>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+<!-- Counter boxes END -->
+
+<!-- Top listed Cards START -->
+<div class="row g-4">
+
+    <!-- Top instructors START -->
+    <div class="col-lg-6 col-xxl-4">
+        <div class="card shadow h-100">
+
+            <!-- Card header -->
+            <div class="card-header border-bottom d-flex justify-content-between align-items-center p-4">
+                <h5 class="card-header-title">Students</h5>
+                <a href="{% url 'student:students' %}" class="btn btn-link p-0 mb-0">View all</a>
+            </div>
+
+            <!-- Card body START -->
+            <div class="card-body p-4">
+
+                <!-- Instructor item START -->
+                {% for student in students %}
+                <div class="d-sm-flex justify-content-between align-items-center">
+                    <!-- Avatar and info -->
+                    <div class="d-sm-flex align-items-center mb-1 mb-sm-0">
+                        <!-- Avatar -->
+                        <div class="avatar avatar-md flex-shrink-0">
+                            <img class="avatar-img rounded-circle" src="{{student.image_url}}" alt="{{student}}">
+                        </div>
+                        <!-- Info -->
+                        <div class="ms-0 ms-sm-2 mt-2 mt-sm-0">
+                            <h6 class="mb-1">{{student}}<i class="bi bi-patch-check-fill text-info small ms-1"></i>
+                            </h6>
+                            <ul class="list-inline mb-0 small">
+                                <li class="list-inline-item fw-light me-2 mb-1 mb-sm-0 fw-bolder">{{student.matric_number}}</li>
+                                <li class="list-inline-item fw-light me-2 mb-1 mb-sm-0"><i
+                                        class="fas fa-star text-warning me-1"></i>{{student.programme}}</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- Button -->
+                    <a href="{% url 'student:student-detail' student.slug %}" class="btn btn-sm btn-light mb-0">View</a>
+                </div>
+                <hr><!-- Divider -->
+                {% empty %}
+                <p>No Student Yet!</p>
+                {% endfor %}
+
+            </div>
+            <!-- Card body END -->
+        </div>
+    </div>
+    <!-- Top instructors END -->
+
+    <!-- Notice Board START -->
+    <div class="col-lg-6 col-xxl-4">
+        <div class="card shadow h-100">
+            <!-- Card header -->
+            <div class="card-header border-bottom p-4">
+                <h5 class="card-header-title">Notice board</h5>
+            </div>
+
+            <!-- Card body START -->
+            <div class="card-body p-4">
+                <div class="custom-scrollbar h-200px">
+
+                    <!-- Notice Board item START -->
+                    <div class="d-flex justify-content-between position-relative">
+                        <div class="d-sm-flex">
+                            <div class="icon-lg bg-purple bg-opacity-10 text-purple rounded-2 flex-shrink-0"><i
+                                    class="fas fa-user-tie fs-5"></i></div>
+                            <!-- Info -->
+                            <div class="ms-0 ms-sm-3 mt-2 mt-sm-0">
+                                <h6 class="mb-0"><a href="#" class="stretched-link">Join New Instructor</a></h6>
+                                <p class="mb-0">Amongst moments do in arrived Fat weddings believed prospect</p>
+                                <span class="small">5 min ago</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Notice Board item END -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Notice Board END -->
+
+</div>
+<!-- Top listed Cards END -->
+{% endblock dashboard_content %}
