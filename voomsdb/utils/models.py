@@ -21,7 +21,7 @@ class PersonalModel(NameTimeBasedModel):
     image = models.ImageField(upload_to=MediaHelper.get_image_upload_path, null=True, blank=True)
     email = models.EmailField(max_length=50)
     address = models.TextField()
-    mobile_no = models.IntegerField()
+    mobile_no = models.CharField(max_length=30)
     gender = models.CharField(max_length=30, choices=GenderChoice.choices, default=GenderChoice.FEMALE)
     
     class Meta:
