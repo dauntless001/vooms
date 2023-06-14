@@ -1,12 +1,14 @@
 from voomsdb.settings.base import *
 import dj_database_url
 from voomsdb.utils.settings import get_env_variable
-
+from voomsdb.settings.packages.aws import *
 
 ALLOWED_HOSTS = ['*']
 
+INSTALLED_APPS.append("storages")
+
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-)rceb+k668zri#f6+r_iesr2@a32zkxuh-2)&3#kfyu(a@gz4="
+SECRET_KEY = get_env_variable("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
