@@ -4,6 +4,7 @@ from voomsdb.utils.models import PersonalModel, NameTimeBasedModel
 from voomsdb.utils.choices import AdmissionTypeChoice
 from voomsdb.utils.media import MediaHelper
 from voomsdb.utils.strings import generate_ref_no
+from django.conf import settings
 # Create your models here.
 
 class User(AbstractUser):
@@ -28,7 +29,9 @@ class Student(PersonalModel):
         return f'{self.last_name} {self.first_name}'
     
     def image_url(self):
-        return self.image.url
+        if self.image:
+            return self.image.url
+        return f"{settings.STATIC_URL}img/default/avatar.png"
 
 
 
