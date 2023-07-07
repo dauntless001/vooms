@@ -31,7 +31,7 @@ class Student(PersonalModel):
     def image_url(self):
         if self.image:
             return self.image.url
-        return f"{settings.STATIC_URL}img/default/avatar.png"
+        return f"{settings.STATIC_URL}images/avatar/06.jpg"
 
 
 
