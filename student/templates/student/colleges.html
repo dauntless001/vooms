@@ -1,0 +1,35 @@
+{% extends 'partials/_auth_layout.html' %}
+{% block page_title %}Colleges{% endblock page_title %}
+{% block dashboard_content %}
+
+<!-- Title -->
+<div class="row">
+    <div class="col-12 mb-3">
+        <h1 class="h3 mb-2 mb-sm-0">Colleges</h1>
+    </div>
+</div>
+
+<!-- Counter boxes START -->
+<div class="row g-4 mb-4">
+    <!-- colleges -->
+    {% for college in colleges %}
+    <div class="col-md-4 col-xxl-3">
+        <div class="card card-body bg-warning bg-opacity-15 p-4 h-100">
+            <a href="{% url 'student:college-detail' college.id %}">
+                <div class="d-flex justify-content-between align-items-center">
+                    <!-- Digit -->
+                    <div>
+                        <h2 class="mb-0 fw-bold" >{{college.name}}</h2>
+                        <button class="btn btn-sm btn-dark">All programmes</button>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+    {% empty %}
+    <p>No college found!</p>
+    {% endfor %}
+
+</div>
+
+{% endblock dashboard_content %}

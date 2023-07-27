@@ -1,0 +1,35 @@
+{% extends 'partials/_auth_layout.html' %}
+{% block page_title %}Departments{% endblock page_title %}
+{% block dashboard_content %}
+
+<!-- Title -->
+<div class="row">
+    <div class="col-12 mb-3">
+        <h1 class="h3 mb-2 mb-sm-0">{{college.name}} departments</h1>
+    </div>
+</div>
+
+<!-- Counter boxes START -->
+<div class="row g-4 mb-4">
+    <!-- colleges -->
+    {% for programme in programmes %}
+    <div class="col-md-4 col-xxl-3">
+        <div class="card card-body bg-warning bg-opacity-15 p-4 h-100">
+            <a href="{% url 'student:programme-students' college.id programme.id %}">
+                <div class="d-flex justify-content-between align-items-center">
+                    <!-- Digit -->
+                    <div class="text-dark">
+                        <p>{{programme.name}}</p>
+                        <button class="btn btn-sm btn-dark">All students</button>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+    {% empty %}
+    <p>No programme found!</p>
+    {% endfor %}
+
+</div>
+
+{% endblock dashboard_content %}

@@ -1,3 +1,4 @@
+from typing import Any, Dict
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseRedirect, JsonResponse
 from django.shortcuts import render, get_object_or_404
@@ -6,6 +7,7 @@ from home.models import Student, Document
 from student.forms import StudentForm
 from django.urls import reverse, reverse_lazy
 from django.contrib import messages
+from programme.models import College, Programme
 
 # Create your views here.
 class StudentsView(LoginRequiredMixin, ListView):
@@ -120,3 +122,36 @@ class VerifyStudent(LoginRequiredMixin, View):
         
         messages.error(request, "Failed to verify student")
         return HttpResponseRedirect(reverse_lazy("student:student-detail", kwargs={'slug' : self.kwargs['slug']}))
+    
+class CollegeListView(LoginRequiredMixin,ListView):
+    template_name = "student/colleges.html"
+    model = College
+    context_object_name = 'colleges'
+
+
+class CollegeDetailView(LoginRequiredMixin,ListView):
+    template_name = "student/programmes.html"
+    model = Programme
+    context_object_name = 'programmes'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['college'] = get_object_or_404(College, id=self.kwargs['college_id'])
+        return context
+
+
+class StudentsByProgrammeView(LoginRequiredMixin, ListView):
+    context_object_name = 'students'
+    template_name = 'student/programme-students.html'
+    paginate_by = 25
+
+    def get_queryset(self, **kwargs):
+        verified = self.request.GET.get('verified', True)
+        return Student.objects.filter(published=verified, programme__id=self.kwargs['programme_id'])
+
+    def get_context_data(self, **kwargs):
+        context =  super().get_context_data(**kwargs)
+        context['no_of_entries'] = Student.objects.count()
+        context['college'] = get_object_or_404(College, id=self.kwargs['college_id'])
+        context['programme'] = get_object_or_404(Programme, id=self.kwargs['programme_id'])
+        return context

@@ -36,7 +36,7 @@
                         <!-- Submenu -->
                         <ul class="nav flex-column collapse show" id="collapseinstructors" data-bs-parent="#navbar-sidebar" style="">
                             <li class="nav-item"> <a class="nav-link" href="{% url 'student:add-student' %}">Add Student</a></li>
-                            <li class="nav-item"> <a class="nav-link" href="{% url 'student:students' %}">View Students</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="{% url 'student:colleges' %}">Colleges</a></li>
                         </ul>
                     </li>
     
@@ -199,6 +199,9 @@
                                     </li>
     
                                     <!-- Links -->
+                                    {% if user.is_superuser %}
+                                    <li><a class="dropdown-item" href="/admin"><i class="bi bi-person fa-fw me-2"></i>Admin</a></li>
+                                    {% endif %}
                                     <li><a class="dropdown-item" href="{% url 'home:edit-profile' %}"><i class="bi bi-person fa-fw me-2"></i>Edit Profile</a></li>
                                     <li><a class="dropdown-item bg-danger-soft-hover" href="{% url 'account_logout' %}"><i class="bi bi-power fa-fw me-2"></i>Sign Out</a></li>
                                     <li> <hr class="dropdown-divider"></li>
